@@ -22,15 +22,18 @@ public class UserController {
     private final PackageRepository packageRepository;
     private final PaymentService paymentService;
     private final PaymentOrderRepository paymentOrderRepository;
+    private final ContactMessageRepository contactMessageRepository;
 
     public UserController(UserRepository userRepository, FavoriteRepository favoriteRepository,
                           PackageRepository packageRepository, PaymentService paymentService,
-                          PaymentOrderRepository paymentOrderRepository) {
+                          PaymentOrderRepository paymentOrderRepository,
+                          ContactMessageRepository contactMessageRepository) {
         this.userRepository = userRepository;
         this.favoriteRepository = favoriteRepository;
         this.packageRepository = packageRepository;
         this.paymentService = paymentService;
         this.paymentOrderRepository = paymentOrderRepository;
+        this.contactMessageRepository = contactMessageRepository;
     }
 
     @PostMapping("/signup")
@@ -201,6 +204,26 @@ public class UserController {
                 .map(PaymentOrder::getPackageObj)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(bookings);
+    }
+
+    @PostMapping("/contact")
+    public ResponseEntity<?> submitContactForm(@RequestBody ContactMessage message) {
+        try {
+            contactMessageRepository.save(message);
+            return ResponseEntity.ok(Map.of("message", "Submitted successfully"));
+        } catch (Exception e) {
+            logger.error("Error saving contact message: {}", e.getMessage());
+            return ResponseEntity.status(500).body(Map.of("message", "Failed to submit form"));
+        }
+    }
+
+    @GetMapping("/contact/messages")
+    public ResponseEntity<List<ContactMessage>> getContactMessages(@RequestParam String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent() && user.get().getType() == UserType.ADMIN) {
+            return ResponseEntity.ok(contactMessageRepository.findAll());
+        }
+        return ResponseEntity.status(403).body(null);
     }
 
 
