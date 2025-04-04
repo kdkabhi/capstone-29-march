@@ -1,55 +1,84 @@
-.contact-page {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Team Section */
+.position-relative {
+  margin-bottom: 100px;
+}
+
+.card {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.text-primary {
+  color: #0d6efd !important;
+  font-weight: 500;
+}
+
+/* Store Locator Section */
+.shadow-sm {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+
+/* Contact Form Section */
+.border-2 {
+  border-width: 2px !important;
+}
+
+.rounded-0 {
+  border-radius: 0 !important;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  padding: 10px 30px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .position-relative {
+    height: auto !important;
+    margin-bottom: 50px;
   }
   
-  .contact-page .card {
-    border-radius: 10px;
+  .position-absolute {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    margin-bottom: 30px;
   }
   
-  .contact-page .form-label {
-    font-weight: bold;
+  .start-50 {
+    left: 0 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-md-6 {
+    margin-bottom: 30px;
   }
   
-  .contact-page .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+  .pe-md-5, .pe-md-4 {
+    padding-right: 15px !important;
   }
   
-  .contact-page .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  .ps-md-0 {
+    padding-left: 15px !important;
   }
-  
-  .contact-page h2 {
-    color: #343a40;
-  }
-  
-  .contact-page h4 {
-    color: #343a40;
-  }
-  
-  .contact-page p {
-    color: #6c757d;
-  }
-  
-  .contact-page .list-unstyled li {
-    color: #6c757d;
-  }
-  
-  .contact-page .list-unstyled li strong {
-    color: #343a40;
-  }
-  
-  .contact-page .list-unstyled li .text-primary {
-    color: #007bff !important;
-  }
-  
-  .contact-page .list-unstyled li .text-danger {
-    color: #dc3545 !important;
-  }
-  
-  .contact-page .list-unstyled li .text-info {
-    color: #17a2b8 !important;
-  }
+}
